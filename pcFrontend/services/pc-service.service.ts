@@ -10,6 +10,6 @@ export class PcServiceService {
   SERVER = "http://localhost:8080"
 
   public testingConnection(){
-    return this.httpclient.get(this.SERVER+'/pong')
+    return this.httpclient.get(this.SERVER+"/pong")
   }
 }
