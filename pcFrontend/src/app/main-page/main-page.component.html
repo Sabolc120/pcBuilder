@@ -1,2 +1,44 @@
-<p>main-page works!</p>
-<button type="button" (click)="testConnection()">Click me</button>
+
+
+<app-navbar></app-navbar>
+<app-opener></app-opener>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-sm-10 box">
+            <h1>What is the computer will be for?</h1>
+            <label class="custom-radio">
+              <input type="radio" name="pc-purpose" class="gaming" (click)="setValue('Gaming')">
+              <span class="checkmark"></span>
+              Gaming PC
+            </label>
+            <label class="custom-radio">
+              <input type="radio" name="pc-purpose" class="casual" (click)="setValue('Casual')">
+              <span class="checkmark"></span>
+              Casual PC
+            </label>
+            <label class="custom-radio">
+                <input type="radio" name="pc-purpose" class="productive" (click)="setValue('Productive')">
+                <span class="checkmark"></span>
+                Productive PC
+              </label>
+              <label class="custom-radio">
+                <input type="radio" name="pc-purpose" class="office" (click)="setValue('Office')">
+                <span class="checkmark"></span>
+                Office PC
+              </label>
+            <!-- További rádiógombok... -->
+            <h4>Picked PC: {{pickedType}}</h4>
+            <div class="nextPage"><i class="fa-solid fa-arrow-right fa-xl"></i></div>
+            <div class="lastPage"><i class="fa-solid fa-arrow-left fa-xl"></i></div>
+            
+          </div>                 
+    </div>
+</body>
+</html>

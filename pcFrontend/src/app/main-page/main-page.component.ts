@@ -8,16 +8,8 @@ import { PcServiceService } from 'services/pc-service.service';
 })
 export class MainPageComponent {
   constructor(private pcService: PcServiceService) {}
-  testConnection(){
-    this.pcService.testingConnection().subscribe(
-      (resp) =>{
-        console.log("Connection works? Check console");
-        
-      },
-      (err) =>{
-        console.log(err);
-      }
-    )
+  pickedType="Not yet picked"
+  setValue(value: string) {
+    this.pickedType = value;
   }
-
 }

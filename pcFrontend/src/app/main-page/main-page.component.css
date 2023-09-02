@@ -1,0 +1,63 @@
+
+.box{
+    margin-top:2%;
+    text-align:center;
+    background-color:#FF7C00;
+    margin-left:8%;
+    height:500px;
+    color:white;
+    border-radius: 10px;
+}
+h1{
+    margin-top:3%;
+}
+.custom-radio {
+    margin-top:3%;
+    display: block;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+  }
+  
+  .custom-radio input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
+    border: 2px solid black; /* A választott keret színe */
+    border-radius: 50%;
+  }
+  
+  .custom-radio input[type="radio"]:checked + .checkmark {
+    background-color: orange; /* Az aktív radio gomb színe */ 
+  }
+  label{
+    transition: 1s;
+  }
+  label:hover{
+    transition: 1s;
+    background-color: black;
+}
+h4{
+  font-size:18px;
+  margin-top:3%;
+  text-align:center;
+}
+.nextPage{
+  margin-left:90%;
+  position: relative;
+}
+.lastPage{
+  position: relative;
+  margin-right:90%;
+  top:-4%;
+}
+  
