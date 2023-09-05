@@ -12,6 +12,8 @@
 <body>
     <div class="row">
         <div class="col-sm-10 box">
+          <!--PC Type picker-->
+          <div *ngIf="pcPage">
             <h1>What is the computer will be for?</h1>
             <label class="custom-radio">
               <input type="radio" name="pc-purpose" class="gaming" (click)="setValue('Gaming')">
@@ -24,7 +26,7 @@
               Casual PC
             </label>
             <label class="custom-radio">
-                <input type="radio" name="pc-purpose" class="productive" (click)="setValue('Productive')">
+                <input type="radio" name="pc-purpose" class="productive" (click)="setValue('Work')">
                 <span class="checkmark"></span>
                 Productive PC
               </label>
@@ -33,11 +35,79 @@
                 <span class="checkmark"></span>
                 Office PC
               </label>
-            <!-- További rádiógombok... -->
-            <h4>Picked PC: {{pickedType}}</h4>
-            <div class="nextPage"><i class="fa-solid fa-arrow-right fa-xl"></i></div>
-            <div class="lastPage"><i class="fa-solid fa-arrow-left fa-xl"></i></div>
+              <h4>Picked PC: {{pickedType}}</h4>
+              <div class="nextPage"><i class="fa-solid fa-arrow-right fa-xl" (click)="goToCpus()"></i></div>
+              <div class="lastPage"><i class="fa-solid fa-arrow-left fa-xl"></i></div>
+          </div>
+           <!--CPU Picker beginning-->
+           <div *ngIf="cpuType">
+            <!--An option will be needed according to what the user picked, which means more ngIf here.-->
+            <h1>Pick a CPU</h1>
+
+            <!--If the user picked a PC for Gaming or for Casual usage-->
+            <div *ngIf="pickedType == 'Gaming' || pickedType == 'Casual'">
+              <h3>How strong CPU would you want?</h3>
+              <label class="custom-radio">
+                <input type="radio" name="pc-purpose" class="gaming" (click)="setCpuDemand('Low')">
+                <span class="checkmark"></span>
+                Budget but trustworthy
+              </label>
+              <label class="custom-radio">
+                <input type="radio" name="pc-purpose" class="gaming" (click)="setCpuDemand('Medium')">
+                <span class="checkmark"></span>
+                Decent CPU
+              </label>
+              <label class="custom-radio">
+                <input type="radio" name="pc-purpose" class="gaming" (click)="setCpuDemand('High')">
+                <span class="checkmark"></span>
+                Strong CPU
+              </label>
+              <label class="custom-radio">
+                <input type="radio" name="pc-purpose" class="gaming" (click)="setCpuDemand('Gaming')">
+                <span class="checkmark"></span>
+                Just making sure its will be fine in 5 years too
+              </label>
+              <label for="amdOrIntel">Pick a brand</label>
+              <p>Intel: Intel is more like for Gaming and focuses on one core performance, more like for very high end work, or for gaming.</p>
+              <p>Amd:   Amd is focusing on number of cores and raw power, perfect for Office work or for Productice work</p>
+              <select id="amdOrIntel" name="amdOrIntel">
+                <option value="Intel" (click)="setBrand(true)">Intel</option>
+                <option value="Amd" (click)="setBrand(false)">Amd</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-success" (click)="loadInOptions()">Ye, this is good! Lets continue</button>
+
             
+            <div *ngIf="pickedType=='Office'">
+              <label for="amdOrIntel">Pick a CPU brand for your Office PC</label>
+              <p>Intel: Intel is more like for Gaming and focuses on one core performance, more like for very high end work, or for gaming.</p>
+              <p>Amd:   Amd is focusing on number of cores and raw power, perfect for Office work or for Productice work</p>
+              <select id="amdOrIntel" name="amdOrIntel">
+                <option value="Intel" (click)="setBrand(true)">Intel</option>
+                <option value="Amd" (click)="setBrand(false)">Amd</option>
+                <button type="submit" class="btn btn-success" (click)="loadInOptions()">Ye, this is good! Lets continue</button>
+              </select>
+              <!--If the user only needs an Office PC-->
+            </div>
+
+            <div *ngIf="pickedType=='Work'">
+              <label for="amdOrIntel">Pick a CPU brand for your Work PC</label>
+              <p>Intel: Intel is more like for Gaming and focuses on one core performance, more like for very high end work, or for gaming.</p>
+              <p>Amd:   Amd is focusing on number of cores and raw power, perfect for Office work or for Productice work</p>
+              <select id="amdOrIntel" name="amdOrIntel">
+                <option value="Intel" (click)="setBrand(true)">Intel</option>
+                <option value="Amd" (click)="setBrand(false)">Amd</option>
+                <button type="submit" class="btn btn-success" (click)="loadInOptions()">Ye, this is good! Lets continue</button>
+              </select>
+              <!--If the user needs a Work PC-->
+            </div>
+
+
+              <h4>Picked PC: {{pickedType}}</h4>
+              <div class="nextPage"><i class="fa-solid fa-arrow-right fa-xl" (click)="goToCpus()"></i></div>
+              <div class="lastPage"><i class="fa-solid fa-arrow-left fa-xl"></i></div>
+          </div>
+            <!--CPU Picker end-->
           </div>                 
     </div>
 </body>
