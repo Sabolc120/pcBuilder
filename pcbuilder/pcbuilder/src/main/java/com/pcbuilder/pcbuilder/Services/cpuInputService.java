@@ -27,6 +27,7 @@ public class cpuInputService {
             }
             else if(pcType.equals("Office")){
                 neededPassMarkPoint = 2000;
+                return cpuInputRepo.filterIntegratedGpuCpu(neededPassMarkPoint, amdOrIntel, neededPassMarkPoint + 3000);
             }
             else if(pcType.equals("Casual")){
                 if(cpuDemand.equals("Low")) neededPassMarkPoint = 6000;

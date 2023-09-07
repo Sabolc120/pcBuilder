@@ -21,4 +21,12 @@ export class PcServiceService {
   
     return this.httpclient.get(this.SERVER + '/cpuInput', { params });
   }
+  public typeOfGpu(pcType: string, gpuDemand: string, resolution: string) {
+    const params = new HttpParams()
+      .set('pcType', pcType)
+      .set('gpuDemand', gpuDemand)
+      .set('resolution', resolution);
+  
+    return this.httpclient.get(this.SERVER + '/gpuInput', { params });
+  }
 }

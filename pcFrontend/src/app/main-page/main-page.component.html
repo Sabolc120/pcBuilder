@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-sm-10 box">
           <!--PC Type picker-->
-          <div *ngIf="pcPage">
+          <div *ngIf="page=='pcType'">
             <h1>What is the computer will be for?</h1>
             <label class="custom-radio">
               <input type="radio" name="pc-purpose" class="gaming" (click)="setValue('Gaming')">
@@ -35,12 +35,12 @@
                 <span class="checkmark"></span>
                 Office PC
               </label>
-              <h4>Picked PC: {{pickedType}}</h4>
-              <div class="nextPage"><i class="fa-solid fa-arrow-right fa-xl" (click)="goToCpus()"></i></div>
-              <div class="lastPage"><i class="fa-solid fa-arrow-left fa-xl"></i></div>
+              <div *ngIf="readyForStageOfCpuBrand">
+                <div class="nextPage"><i class="fa-solid fa-arrow-right fa-xl" (click)="goToCpus()"></i></div>
+              </div>
           </div>
            <!--CPU Picker beginning-->
-           <div *ngIf="cpuType">
+           <div *ngIf="page=='cpusOne'">
             <!--An option will be needed according to what the user picked, which means more ngIf here.-->
             <h1>Pick a CPU</h1>
 
@@ -68,47 +68,136 @@
                 Just making sure its will be fine in 5 years too
               </label>
               <label for="amdOrIntel">Pick a brand</label>
-              <p>Intel: Intel is more like for Gaming and focuses on one core performance, more like for very high end work, or for gaming.</p>
-              <p>Amd:   Amd is focusing on number of cores and raw power, perfect for Office work or for Productice work</p>
-              <select id="amdOrIntel" name="amdOrIntel">
-                <option value="Intel" (click)="setBrand(true)">Intel</option>
-                <option value="Amd" (click)="setBrand(false)">Amd</option>
-              </select>
+              <select id="amdOrIntel" name="amdOrIntel" (change)="setBrand($event)">
+                <option value="Intel">Intel</option>
+                <option value="Amd">Amd</option>
+              </select>              
+              <div *ngIf="pickedBrand && setCpuDemand">
+                <button type="submit" class="btn btn-success" (click)="loadInOptions()">Ye, this is good! Lets continue</button>
+              </div>
             </div>
-            <button type="submit" class="btn btn-success" (click)="loadInOptions()">Ye, this is good! Lets continue</button>
 
-            
             <div *ngIf="pickedType=='Office'">
               <label for="amdOrIntel">Pick a CPU brand for your Office PC</label>
-              <p>Intel: Intel is more like for Gaming and focuses on one core performance, more like for very high end work, or for gaming.</p>
-              <p>Amd:   Amd is focusing on number of cores and raw power, perfect for Office work or for Productice work</p>
-              <select id="amdOrIntel" name="amdOrIntel">
-                <option value="Intel" (click)="setBrand(true)">Intel</option>
-                <option value="Amd" (click)="setBrand(false)">Amd</option>
+              <select id="amdOrIntel" name="amdOrIntel" (change)="setBrand($event)">
+                <option value="Intel">Intel</option>
+                <option value="Amd">Amd</option>
+              </select>              
+              <div *ngIf="pickedBrand && setCpuDemand">
                 <button type="submit" class="btn btn-success" (click)="loadInOptions()">Ye, this is good! Lets continue</button>
-              </select>
+              </div>
               <!--If the user only needs an Office PC-->
             </div>
 
             <div *ngIf="pickedType=='Work'">
-              <label for="amdOrIntel">Pick a CPU brand for your Work PC</label>
-              <p>Intel: Intel is more like for Gaming and focuses on one core performance, more like for very high end work, or for gaming.</p>
-              <p>Amd:   Amd is focusing on number of cores and raw power, perfect for Office work or for Productice work</p>
-              <select id="amdOrIntel" name="amdOrIntel">
-                <option value="Intel" (click)="setBrand(true)">Intel</option>
-                <option value="Amd" (click)="setBrand(false)">Amd</option>
+              <label for="amdOrIntel">Pick a CPU brand for your Work PC to continue</label>
+              <select id="amdOrIntel" name="amdOrIntel" (change)="setBrand($event)">
+                <option value="Intel">Intel</option>
+                <option value="Amd">Amd</option>
+              </select>              
+              <div *ngIf="pickedBrand && setCpuDemand">
                 <button type="submit" class="btn btn-success" (click)="loadInOptions()">Ye, this is good! Lets continue</button>
-              </select>
+              </div>
               <!--If the user needs a Work PC-->
+            </div>
+            <div *ngIf="readyForStageOfCpuPick">
+              <div class="nextPage"><i class="fa-solid fa-arrow-right fa-xl" (click)="goToCpusTwo()"></i></div>
+            </div>
+          </div>
+            <!--CPU Picker end-->
+            <div *ngIf="page=='cpusTwo'">
+              <label for="amdOrIntel">Its time to pick a CPU for your {{pickedType}} PC!</label>
+              <p>The listed Processors will be below here, you can pick any of them freely,
+                we picked your options according to your settings needs for {{cpuDemand}} settings for your {{pickedType}} PC
+              </p>
+              <select [(ngModel)]="selectedCpuIdentifier" (change)="updateReadyForGpuStageOne()">
+                <option *ngFor="let cpu of filteredCpusList" [value]="cpu.identifierCpu">
+                  {{ cpu.cpuName }}
+                </option>
+              </select>
+              <div *ngIf="readyForGpuStageOne">
+                <div class="nextPage"><i class="fa-solid fa-arrow-right fa-xl" (click)="goToGpusOne()"></i></div>
+              </div>
+            </div>
+            <div *ngIf="page=='gpusOne'">
+              <h3>Processor name: {{foundCpu?.cpuName}}</h3>
+              <p>Cores: {{foundCpu?.cpuCores}}</p>
+              <p>Performance points: {{foundCpu?.passMarkPoints}}</p>
+              <p>Platform: {{foundCpu.platform}}</p>
+              <p>Release date: {{foundCpu.releaseDate}}</p>
+              <p>Price: {{foundCpu.cpuPriceUsd}}</p>
+              <p>Reccommended settings: {{cpuDemand}}</p>              
+            </div>
+            <!--Will need ngIf again for PC types....-->
+            <div *ngIf="(pickedType == 'Gaming' || pickedType == 'Casual' || pickedType == 'Work') && readyForGpuStageOne == true && readyForGpuStageTwo == true && page=='gpusOne'">
+              
+            <!--Resolution pick beginning-->
+            <h3>Used resolution</h3>
+            <label class="custom-radio">
+              <input type="radio" name="resolution" class="resolution" (click)="setResolutionDemand('1920x1080')">
+              <span class="checkmark"></span>
+              FullHD Resolution
+            </label>
+            <label class="custom-radio">
+              <input type="radio" name="resolution" class="resolution" (click)="setResolutionDemand('2560x1440')">
+              <span class="checkmark"></span>
+              QHD Resolution
+            </label>
+            <label class="custom-radio">
+              <input type="radio" name="resolution" class="resolution" (click)="setResolutionDemand('3840x2160')">
+              <span class="checkmark"></span>
+              4K Resolution
+            </label>
+            <!--Resolution pick Ending-->
+
+            <!--Graphics demand beginning-->
+            <h3>Demanded Graphics</h3>
+            <label class="custom-radio">
+              <input type="radio" name="graphics" class="resolution" (click)="setGpuDemand('Ultra')">
+              <span class="checkmark"></span>
+              Ultra graphics settings
+            </label>
+            <label class="custom-radio">
+              <input type="radio" name="graphics" class="resolution" (click)="setGpuDemand('High')">
+              <span class="checkmark"></span>
+              High Graphics settings
+            </label>
+            <label class="custom-radio">
+              <input type="radio" name="graphics" class="resolution" (click)="setGpuDemand('Medium')">
+              <span class="checkmark"></span>
+              Medium Graphics settings
+            </label>
+            <label class="custom-radio">
+              <input type="radio" name="graphics" class="resolution" (click)="setGpuDemand('Low')">
+              <span class="checkmark"></span>
+              Low graphics settings
+            </label>
+            <!--Graphics demand ending-->
+            <div *ngIf="readyConfirmingOptions">
+              <button type="submit" class="btn btn-success" (click)="loadInOptionsGpu()">This seems good!</button>
+            </div>
+            </div>
+            <div *ngIf="readyForPickingGpu">
+              <div class="nextPage"><i class="fa-solid fa-arrow-right fa-xl" (click)="goToGpusTwo()"></i></div>
+            </div>
+            
+            <!--Beginning of Gpu picking-->
+            <div *ngIf="page=='gpusTwo'">
+              <h1>Pick your {{pickedType}} PCs Graphics Card</h1>
+              <p>The algorithm picked the fitting GPUs for your demands</p>
+              <select [(ngModel)]="selectedGpuIdentifier" (change)="updateReadyForGpuStageTwo()">
+                <option *ngFor="let gpu of filteredGpuList" [value]="gpu.identifierCpu">
+                  {{ gpu.gpuName }}
+                </option>
+              </select>
             </div>
 
 
-              <h4>Picked PC: {{pickedType}}</h4>
-              <div class="nextPage"><i class="fa-solid fa-arrow-right fa-xl" (click)="goToCpus()"></i></div>
-              <div class="lastPage"><i class="fa-solid fa-arrow-left fa-xl"></i></div>
+
+            <!--Ending of Gpu picking-->
+            <h3>Your currently picked configuration so far: {{pickedType}}</h3>
           </div>
-            <!--CPU Picker end-->
-          </div>                 
+          <!--Holnapi TO-DO: Alaplap modul létrehozása, Alaplap adatbázis feltőltése, majd pedig backend megirása hogy milyen alaplapot választhatsz, ugyanazz a kinézet mint eddig, irja ki a cpu tulajdonságokat, majd pedig a GPU tulajdonságokat is a kövi oldalon, majd pedig legyen ott a legördülő menü is az alaplapokkal kapcsolatban.-->          
     </div>
 </body>
 </html>
