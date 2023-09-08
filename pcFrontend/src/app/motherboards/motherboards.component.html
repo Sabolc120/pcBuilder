@@ -2,8 +2,15 @@
   <!--Beginning of Motherboard picking-->
 <h1>Pick your {{pickedType}} PCs Motherboard</h1>
 <p>The algorithm picked the fitting motherboards for your demands</p>
-<select [(ngModel)]="selectedMotherBoardIdentifier" (change)="findSelectedMotherboards()">
+<select [(ngModel)]="selectedMotherBoardIdentifier" (change)="readyForFilter()">
 <option *ngFor="let mbu of motherBoards" [value]="mbu.motherBoardId">
     {{ mbu.motherBoardName }}
 </option>
- </select>    
+ </select>
+  <p><strong>Alaplap név: </strong>{{foundMotherboard.name}}</p>
+  <p><strong>Foglalat: </strong>{{foundMotherboard.socket}}</p>
+  <p><strong>Videókártya foglalat: </strong>{{foundMotherboard.pcie}}</p>
+  <p><strong>Generáció: </strong>{{foundMotherboard.generation}}</p>
+  <p><strong>Ár: </strong>{{foundMotherboard.price}}</p> 
+
+  <!--Holnapi TO-DO 1. PIHENÉS! 2. weboldal újradizájnolása, tisztábbá tevése, feleslegese elemeket kitörölni, akár újraírni.-->

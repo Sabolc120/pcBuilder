@@ -15,6 +15,7 @@ export class MotherboardsComponent {
     ngOnInit(): void {
       this.loadInMotherBoards();
     }
+    readyForMoving = false;
     socketNeeded = this.hub.getSocketNeeded()
     pickedType = this.hub.getPickedType()
     pcieNeeded = this.hub.getPcie()
@@ -28,7 +29,9 @@ export class MotherboardsComponent {
       name: "",
       generation:""
     }
-
+    readyForFilter(){
+      this.findSelectedMotherboards()
+    }
     loadInMotherBoards(){
       console.log("Proci plat: "+this.socketNeeded);
       console.log("PCIE: "+this.pcieNeeded);
@@ -47,8 +50,11 @@ export class MotherboardsComponent {
       )
     }
     findSelectedMotherboards(){
+      console.log("findmotherboard function gets called");
+      console.log("selected motherboards id: "+this.selectedMotherBoardIdentifier);
+      
       for (let i = 0; i < this.motherBoards.length; i++) {
-        if (this.motherBoards[i].gpuIdentifier == this.selectedMotherBoardIdentifier) {
+        if (this.motherBoards[i].motherBoardId == this.selectedMotherBoardIdentifier) {
           console.log("Keresett ID Megtalálva(Motherboard)", this.selectedMotherBoardIdentifier);
             this.foundMotherboard = {
                 motherBoardIdentifier: this.motherBoards[i].motherBoardId,

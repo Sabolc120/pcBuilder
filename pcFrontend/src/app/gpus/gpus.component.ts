@@ -43,9 +43,6 @@ export class GpusComponent {
     this.showMyGpu = true
     this.findSelectedGpus()
   }
-  goToGpusTwo(){
-    
-  }
   setGpuDemand(value: string){
     this.gpuDemand = value;
     if(this.resolution!=null && this.gpuDemand !=null){
