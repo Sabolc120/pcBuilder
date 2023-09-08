@@ -10,6 +10,9 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { FooterComponent } from './footer/footer.component';
 import { OpenerComponent } from './opener/opener.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { GpusComponent } from './gpus/gpus.component';
+import { MotherboardsComponent } from './motherboards/motherboards.component';
+import { HubService } from './hub.service';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     FooterComponent,
     OpenerComponent,
     NavbarComponent,
+    GpusComponent,
+    MotherboardsComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     FormsModule,
     RouterModule
   ],
-  providers: [],
+  providers: [MainPageComponent, GpusComponent, MotherboardsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

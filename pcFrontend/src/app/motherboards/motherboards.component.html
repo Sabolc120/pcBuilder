@@ -1,0 +1,9 @@
+
+  <!--Beginning of Motherboard picking-->
+<h1>Pick your {{pickedType}} PCs Motherboard</h1>
+<p>The algorithm picked the fitting motherboards for your demands</p>
+<select [(ngModel)]="selectedMotherBoardIdentifier" (change)="findSelectedMotherboards()">
+<option *ngFor="let mbu of motherBoards" [value]="mbu.motherBoardId">
+    {{ mbu.motherBoardName }}
+</option>
+ </select>    

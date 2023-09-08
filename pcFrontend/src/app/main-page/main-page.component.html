@@ -120,84 +120,20 @@
               </div>
             </div>
             <div *ngIf="page=='gpusOne'">
-              <h3>Processor name: {{foundCpu?.cpuName}}</h3>
-              <p>Cores: {{foundCpu?.cpuCores}}</p>
-              <p>Performance points: {{foundCpu?.passMarkPoints}}</p>
-              <p>Platform: {{foundCpu.platform}}</p>
-              <p>Release date: {{foundCpu.releaseDate}}</p>
-              <p>Price: {{foundCpu.cpuPriceUsd}}</p>
-              <p>Reccommended settings: {{cpuDemand}}</p>              
+              <h3><strong>Processor name: </strong>{{foundCpu?.cpuName}}</h3>
+              <p><strong>Cores:</strong> {{foundCpu?.cpuCores}}</p>
+              <p><strong>Performance points: </strong>{{foundCpu?.passMarkPoints}}</p>
+              <p><strong>Platform: </strong>{{foundCpu.platform}}</p>
+              <p><strong>Release date: </strong>{{foundCpu.releaseDate}}</p>
+              <p><strong>Price: </strong>{{foundCpu.cpuPriceUsd}}</p>
+              <p><strong>Reccommended settings: </strong>{{cpuDemand}}</p>              
             </div>
             <!--Will need ngIf again for PC types....-->
             <div *ngIf="(pickedType == 'Gaming' || pickedType == 'Casual' || pickedType == 'Work') && readyForGpuStageOne == true && readyForGpuStageTwo == true && page=='gpusOne'">
-              
-            <!--Resolution pick beginning-->
-            <h3>Used resolution</h3>
-            <label class="custom-radio">
-              <input type="radio" name="resolution" class="resolution" (click)="setResolutionDemand('1920x1080')">
-              <span class="checkmark"></span>
-              FullHD Resolution
-            </label>
-            <label class="custom-radio">
-              <input type="radio" name="resolution" class="resolution" (click)="setResolutionDemand('2560x1440')">
-              <span class="checkmark"></span>
-              QHD Resolution
-            </label>
-            <label class="custom-radio">
-              <input type="radio" name="resolution" class="resolution" (click)="setResolutionDemand('3840x2160')">
-              <span class="checkmark"></span>
-              4K Resolution
-            </label>
-            <!--Resolution pick Ending-->
-
-            <!--Graphics demand beginning-->
-            <h3>Demanded Graphics</h3>
-            <label class="custom-radio">
-              <input type="radio" name="graphics" class="resolution" (click)="setGpuDemand('Ultra')">
-              <span class="checkmark"></span>
-              Ultra graphics settings
-            </label>
-            <label class="custom-radio">
-              <input type="radio" name="graphics" class="resolution" (click)="setGpuDemand('High')">
-              <span class="checkmark"></span>
-              High Graphics settings
-            </label>
-            <label class="custom-radio">
-              <input type="radio" name="graphics" class="resolution" (click)="setGpuDemand('Medium')">
-              <span class="checkmark"></span>
-              Medium Graphics settings
-            </label>
-            <label class="custom-radio">
-              <input type="radio" name="graphics" class="resolution" (click)="setGpuDemand('Low')">
-              <span class="checkmark"></span>
-              Low graphics settings
-            </label>
-            <!--Graphics demand ending-->
-            <div *ngIf="readyConfirmingOptions">
-              <button type="submit" class="btn btn-success" (click)="loadInOptionsGpu()">This seems good!</button>
-            </div>
-            </div>
-            <div *ngIf="readyForPickingGpu">
-              <div class="nextPage"><i class="fa-solid fa-arrow-right fa-xl" (click)="goToGpusTwo()"></i></div>
-            </div>
-            
-            <!--Beginning of Gpu picking-->
-            <div *ngIf="page=='gpusTwo'">
-              <h1>Pick your {{pickedType}} PCs Graphics Card</h1>
-              <p>The algorithm picked the fitting GPUs for your demands</p>
-              <select [(ngModel)]="selectedGpuIdentifier" (change)="updateReadyForGpuStageTwo()">
-                <option *ngFor="let gpu of filteredGpuList" [value]="gpu.identifierCpu">
-                  {{ gpu.gpuName }}
-                </option>
-              </select>
-            </div>
-
-
-
-            <!--Ending of Gpu picking-->
-            <h3>Your currently picked configuration so far: {{pickedType}}</h3>
+              <app-gpus></app-gpus>
+              </div>
+            <h3>Your currently picked configuration so far: {{pickedType}}</h3> 
           </div>
-          <!--Holnapi TO-DO: Alaplap modul létrehozása, Alaplap adatbázis feltőltése, majd pedig backend megirása hogy milyen alaplapot választhatsz, ugyanazz a kinézet mint eddig, irja ki a cpu tulajdonságokat, majd pedig a GPU tulajdonságokat is a kövi oldalon, majd pedig legyen ott a legördülő menü is az alaplapokkal kapcsolatban.-->          
     </div>
 </body>
 </html>

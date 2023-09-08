@@ -1,0 +1,122 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ebebeb;
+  }
+  
+  .box {
+    margin: 2% auto;
+    text-align: center;
+    background-color: #FF7C00;
+    width: 80%;
+    height: auto;
+    color: white;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1, h3 {
+    margin-top: 3%;
+    text-transform: uppercase;
+  }
+  
+  .custom-radio {
+    margin-top: 2%;
+    display: block;
+    margin-bottom: 1.3rem;
+    position: relative;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-radio:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  .custom-radio input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 50%;
+  }
+  
+  .custom-radio input[type="radio"]:checked + .checkmark {
+    background-color: white;
+  }
+  
+  label, p {
+    font-size: 1rem;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  label:hover, p:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  h4 {
+    font-size: 1.1rem;
+    margin-top: 2%;
+    text-align: center;
+  }
+  
+  .nextPage, .lastPage {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .nextPage {
+    right: 2%;
+  }
+  
+  .lastPage {
+    left: 2%;
+  }
+  
+  .btn {
+    margin-top: 1%;
+    border-radius: 8px;
+    padding: 10px 20px;
+  }
+  .dataBox{
+    margin-right:30%;
+  }
+  select {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    appearance: none;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+  }
+  
+  select:hover {
+    border-color: #a5a5a5;
+  }
+  
+  select:focus {
+    border-color: #5a5a5a;
+    outline: none;
+  }
+  hr.styled-hr {
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, transparent, black, transparent);
+    margin: 20px 0;
+}
+  
+  

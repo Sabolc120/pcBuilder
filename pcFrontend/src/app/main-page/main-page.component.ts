@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PcServiceService } from 'services/pc-service.service';
+import { GpusComponent } from '../gpus/gpus.component';
+import { HubService } from '../hub.service';
 
 @Component({
   selector: 'app-main-page',
@@ -7,7 +9,10 @@ import { PcServiceService } from 'services/pc-service.service';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent {
-  constructor(private pcService: PcServiceService) {}
+  constructor(private pcService: PcServiceService,
+    private hub: HubService) {
+    }
+  
   //The beginning of Page related and CPU Related variables
   pickedType="Not yet picked" //The picked type of the PC
   page="pcType"
@@ -35,19 +40,8 @@ export class MainPageComponent {
   //The end of Page related and CPU Related variables
 
   //The beginning of Gpu related variables
-  gpuDemand = ""
-  resolution=""
+
   readyForGpuStageTwo = false;
-  filteredGpuList: any[] = []; //Array containing All the GPUS
-  selectedGpuIdentifier = 0
-  foundGpu={  //Array containing the filtered Gpus
-    gpuIdentifier: 0,
-    gpuName: "",
-    passMarkScore:0,
-    releaseDate:"",
-    price:0,
-    vram:0
-  }
   readyForPickingGpu = false;
   readyConfirmingOptions = false;
   //The end of Gpu related variables
@@ -57,15 +51,6 @@ export class MainPageComponent {
   goToCpusTwo(){
     this.page="cpusTwo"
   }
-  goToGpusOne(){
-    this.page="gpusOne"
-    this.readyForGpuStageTwo = true;
-    this.findSelectedCpu()
-  }
-  goToGpusTwo(){
-    this.page="gpusTwo"
-    this.findSelectedGpus()
-  }
   //Setters begin
   setBrand(event: any) {
     const value = event.target.value;
@@ -73,6 +58,7 @@ export class MainPageComponent {
     this.pickedBrand = true
   }
   setValue(value: string) {
+    this.hub.setPickedType(value)
     this.pickedType = value;
     this.readyForStageOfCpuBrand = true
   }
@@ -85,7 +71,6 @@ export class MainPageComponent {
       this.readyForGpuStageOne = true;
     }
   }
-  //Setters end
   findSelectedCpu() {
     for (let i = 0; i < this.filteredCpusList.length; i++) {
       if (this.filteredCpusList[i].identifierCpu == this.selectedCpuIdentifier) {
@@ -100,6 +85,7 @@ export class MainPageComponent {
               cpuPriceUsd: this.filteredCpusList[i].cpuPriceUSD
 
           };
+          this.hub.setSocketNeeded(this.filteredCpusList[i].platform)
           break; // Megtaláltuk az elemet, így kilépünk a ciklusból
       }
   }
@@ -121,48 +107,9 @@ export class MainPageComponent {
         this.readyForStageOfCpuPick = true;
       }
   }
-  //The beginning of GPU methods
-  setResolutionDemand(value: string){
-    this.resolution = value;
+  goToGpusOne(){
+    this.page="gpusOne"
+    this.readyForGpuStageTwo = true;
+    this.findSelectedCpu()
   }
-  updateReadyForGpuStageTwo(){
-
-  }
-  setGpuDemand(value: string){
-    this.gpuDemand = value;
-    if(this.resolution!=null && this.gpuDemand !=null){
-      this.readyConfirmingOptions = true;
-    }
-  }
-  loadInOptionsGpu(){
-    this.pcService.typeOfGpu(this.pickedType, this.gpuDemand, this.resolution).subscribe(
-      (resp:any)=>{
-        this.filteredGpuList = resp
-        console.log("The query was sent successfully for the GPu filtering");
-      },
-      (err)=>{
-        console.log("Something went wrong with querrying the Gpus");
-        console.log(err);
-      } 
-    )
-    this.readyForPickingGpu = true
-  }
-  findSelectedGpus(){
-    console.log(this.filteredGpuList.length);
-    
-    for (let i = 0; i < this.filteredGpuList.length; i++) {
-      if (this.filteredGpuList[i].gpuIdentifier == this.selectedGpuIdentifier) {
-        console.log("Keresett ID Megtalálva(GPU)", this.selectedGpuIdentifier);
-          this.foundGpu = {
-              gpuIdentifier: this.filteredGpuList[i].gpuIdentifier,
-              gpuName: this.filteredGpuList[i].gpuName,
-              passMarkScore: this.filteredGpuList[i].passmarkScore,
-              releaseDate: this.filteredGpuList[i].releaseDate,
-              price: this.filteredGpuList[i].price,
-              vram: this.filteredGpuList[i].vram
-          };
-          break; // Megtaláltuk az elemet, így kilépünk a ciklusból
-        }
-      }
-    }
-  }
+}

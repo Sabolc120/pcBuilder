@@ -29,4 +29,11 @@ export class PcServiceService {
   
     return this.httpclient.get(this.SERVER + '/gpuInput', { params });
   }
+  public typeOfMotherBoard(socket: string, pcie: string) {
+    const params = new HttpParams()
+      .set('socket', socket)
+      .set('pcie', pcie);
+  
+    return this.httpclient.get(this.SERVER + '/motherBoardInput', { params });
+  }
 }

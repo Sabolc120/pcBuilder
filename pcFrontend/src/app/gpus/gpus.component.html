@@ -1,0 +1,75 @@
+<!--Resolution pick beginning-->
+<hr class="styled-hr">
+
+<h3>Used resolution</h3>
+<label class="custom-radio">
+  <input type="radio" name="resolution" class="resolution" (click)="setResolutionDemand('1920x1080')">
+  <span class="checkmark"></span>
+  FullHD Resolution
+</label>
+<label class="custom-radio">
+  <input type="radio" name="resolution" class="resolution" (click)="setResolutionDemand('2560x1440')">
+  <span class="checkmark"></span>
+  QHD Resolution
+</label>
+<label class="custom-radio">
+  <input type="radio" name="resolution" class="resolution" (click)="setResolutionDemand('3840x2160')">
+  <span class="checkmark"></span>
+  4K Resolution
+</label>
+<!--Resolution pick Ending-->
+
+<!--Graphics demand beginning-->
+<hr class="styled-hr">
+<h3>Demanded Graphics</h3>
+<label class="custom-radio">
+  <input type="radio" name="graphics" class="resolution" (click)="setGpuDemand('Ultra')">
+  <span class="checkmark"></span>
+  Ultra graphics settings
+</label>
+<label class="custom-radio">
+  <input type="radio" name="graphics" class="resolution" (click)="setGpuDemand('High')">
+  <span class="checkmark"></span>
+  High Graphics settings
+</label>
+<label class="custom-radio">
+  <input type="radio" name="graphics" class="resolution" (click)="setGpuDemand('Medium')">
+  <span class="checkmark"></span>
+  Medium Graphics settings
+</label>
+<label class="custom-radio">
+  <input type="radio" name="graphics" class="resolution" (click)="setGpuDemand('Low')">
+  <span class="checkmark"></span>
+  Low graphics settings
+</label>
+<!--Graphics demand ending-->
+<div *ngIf="readyConfirmingOptions">
+    <button type="submit" class="btn btn-success" (click)="showNextSection = true; loadInOptionsGpu()">This seems good!</button>
+</div>
+
+<div *ngIf="showNextSection">
+      <!--Beginning of Gpu picking-->
+      <hr class="styled-hr">
+
+        <h1>Pick your {{pickedType}} PCs Graphics Card</h1>
+        <p>The algorithm picked the fitting GPUs for your demands</p>
+        <select [(ngModel)]="selectedGpuIdentifier" (change)="updateReadyForGpuStageTwo()">
+          <option *ngFor="let gpu of filteredGpuList" [value]="gpu.gpuIdentifier">
+            {{ gpu.gpuName }}
+          </option>
+      </select>    
+</div>
+<div *ngIf="showMyGpu">
+    <hr>
+    <h3>The data of your picked Graphics card for {{gpuDemand}} settings will be below</h3>
+    <p><strong>Name:</strong> {{ foundGpu.gpuName }}</p>
+    <p><strong>PassMark Score:</strong> {{ foundGpu.passMarkScore }}</p>
+    <p><strong>Release Date:</strong> {{ foundGpu.releaseDate }}</p>
+    <p><strong>Price:</strong> {{ foundGpu.price }}</p>
+    <p><strong>VRAM:</strong> {{ foundGpu.vram }} Gb</p>
+</div>
+<!--Ending of Gpu picking-->
+
+<div *ngIf="readyForMotherBoard == 'ready'">
+  <app-motherboards></app-motherboards>
+</div>

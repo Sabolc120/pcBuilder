@@ -95,3 +95,20 @@ h4 {
 .dataBox{
   margin-right:30%;
 }
+select {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  appearance: none;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+select:hover {
+  border-color: #a5a5a5;
+}
+
+select:focus {
+  border-color: #5a5a5a;
+  outline: none;
+}
