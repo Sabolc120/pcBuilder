@@ -34,7 +34,7 @@ public class mainControllers {
         return gpuInputService.filterOutGpus(resolution, gpuDemand, pcType);
     }
     @GetMapping("/motherBoardInput")
-    public List<motherBoardModel> filterOutMotherBoards(@RequestParam(value = "socket") String socket, @RequestParam("pcie") String pcie){
-        return motherBoardInputService.filterOutMotherBoards(socket, pcie);
+    public List<motherBoardModel> filterOutMotherBoards(@RequestParam(value = "socket") String socket, @RequestParam("pcie") String pcie, @RequestParam("pcType") String pcType){
+        return motherBoardInputService.filterOutMotherBoards(socket, pcie, pcType);
     }
 }

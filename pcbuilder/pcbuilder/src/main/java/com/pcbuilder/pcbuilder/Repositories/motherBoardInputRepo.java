@@ -23,5 +23,8 @@ public interface motherBoardInputRepo extends JpaRepository<motherBoardModel, Lo
     List<motherBoardModel> filterMotherBoards(@Param(value="socket") String socket,
                                               @Param(value = "pcie") String pcie);
 
+    @Query(value = "SELECT * FROM mother_board_model WHERE socket = :socket", nativeQuery = true)
+    List<motherBoardModel> filterOfficeMotherBoards(@Param(value="socket") String socket);
+
 
 }

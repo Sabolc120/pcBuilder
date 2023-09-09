@@ -16,3 +16,7 @@ p{
     margin-top:3%;
     background-color: #FF7C00;
 }
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ebebeb;
+}

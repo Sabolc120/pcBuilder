@@ -11,11 +11,15 @@ import { HubService } from '../hub.service';
 export class GpusComponent {
   constructor(private pcService: PcServiceService,
     private hub: HubService) {}
+    pickedType = ""
+    ngOnInit(): void {
+      this.pickedType = this.hub.getPickedType()
+    }
+
 
     //The beginning of Gpu related variables
     showMyGpu = false;
     showNextSection = false;
-    pickedType = this.hub.getPickedType()
     gpuDemand = ""
     resolution=""
     readyForGpuStageTwo = false;

@@ -102,6 +102,8 @@ select {
   appearance: none;
   background-color: #f9f9f9;
   transition: border-color 0.3s ease;
+  margin-left:3%;
+  text-align:center;
 }
 
 select:hover {
@@ -111,4 +113,17 @@ select:hover {
 select:focus {
   border-color: #5a5a5a;
   outline: none;
+}
+.btn-costume{
+  background-color: white;
+  color:black;
+}
+.selectCpu{
+  width:30%;
+  margin:auto;
+}
+.btn-costume{
+  background-color: white;
+  color:black;
+  width:30%;
 }

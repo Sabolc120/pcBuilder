@@ -15,7 +15,7 @@ public interface cpuInputRepo extends JpaRepository<cpuModel, Long> {
     @Query(value = "SELECT * FROM cpu_model WHERE pass_mark_points BETWEEN :passMarkPoints AND :maxMargin AND amd_or_intel = :amdOrIntel", nativeQuery = true)
     List<cpuModel> filterOutCpu(@Param(value = "passMarkPoints") int passMarkPoints, @Param("amdOrIntel") boolean amdOrIntel, int maxMargin);
 
-    @Query(value = "SELECT * FROM cpu_model WHERE pass_mark_points BETWEEN :passMarkPoints AND :maxMargin AND amd_or_intel = :amdOrIntel AND (model_name LIKE '%G' OR model_name LIKE '%K' OR model_name NOT LIKE '%F' AND model_name NOT LIKE '%KF')", nativeQuery = true)
+    @Query(value = "SELECT * FROM cpu_model WHERE pass_mark_points BETWEEN :passMarkPoints AND :maxMargin AND amd_or_intel = :amdOrIntel AND (cpu_name LIKE '%G' OR cpu_name  LIKE '%K' OR cpu_name  NOT LIKE '%F' AND cpu_name  NOT LIKE '%KF')", nativeQuery = true)
     List<cpuModel> filterIntegratedGpuCpu(@Param(value = "passMarkPoints") int passMarkPoints, @Param("amdOrIntel") boolean amdOrIntel, int maxMargin);
 
 }

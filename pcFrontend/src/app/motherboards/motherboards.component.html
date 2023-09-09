@@ -11,6 +11,19 @@
   <p><strong>Foglalat: </strong>{{foundMotherboard.socket}}</p>
   <p><strong>Videókártya foglalat: </strong>{{foundMotherboard.pcie}}</p>
   <p><strong>Generáció: </strong>{{foundMotherboard.generation}}</p>
-  <p><strong>Ár: </strong>{{foundMotherboard.price}}</p> 
+  <p><strong>Ár: </strong>{{foundMotherboard.price}}</p>
+  
+  <button type="submit" class="btn btn-costume" (click)="changeReadyForRam()">OK</button>
 
-  <!--Holnapi TO-DO 1. PIHENÉS! 2. weboldal újradizájnolása, tisztábbá tevése, feleslegese elemeket kitörölni, akár újraírni.-->
+  <div *ngIf="readyForRam">
+    <h3 class="tit">Pick your needed RAM Amount</h3>
+    <select [(ngModel)]="selectedRam">
+      <option value="64">64 GB</option>
+      <option value="32">32 GB</option>
+      <option value="16">16 GB</option>
+      <option value="8">8 GB</option>
+    </select>
+    <p>
+      <button type="button" class="btn btn-costume">The PC is done!</button>
+    </p>
+  </div>

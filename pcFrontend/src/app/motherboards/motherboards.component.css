@@ -1,0 +1,29 @@
+select {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    appearance: none;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+    margin-top:3%;
+    margin-bottom:3%;
+    width:30%;
+    text-align:center;
+  }
+  
+  select:hover {
+    border-color: #a5a5a5;
+  }
+  
+  select:focus {
+    border-color: #5a5a5a;
+    outline: none;
+}
+.btn-costume{
+  background-color: white;
+  color:black;
+  width:30%;
+}
+.tit{
+  margin-top:3%;
+}

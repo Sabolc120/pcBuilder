@@ -1,7 +1,8 @@
 <!--Resolution pick beginning-->
 <hr class="styled-hr">
 
-<h3>Used resolution</h3>
+<div *ngIf="pickedType !='Office'">
+  <h3>Used resolution</h3>
 <label class="custom-radio">
   <input type="radio" name="resolution" class="resolution" (click)="setResolutionDemand('1920x1080')">
   <span class="checkmark"></span>
@@ -44,7 +45,7 @@
 </label>
 <!--Graphics demand ending-->
 <div *ngIf="readyConfirmingOptions">
-    <button type="submit" class="btn btn-success" (click)="showNextSection = true; loadInOptionsGpu()">This seems good!</button>
+    <button type="submit" class="btn btn-costume" (click)="showNextSection = true; loadInOptionsGpu()">This seems good!</button>
 </div>
 
 <div *ngIf="showNextSection">
@@ -67,8 +68,14 @@
     <p><strong>Release Date:</strong> {{ foundGpu.releaseDate }}</p>
     <p><strong>Price:</strong> {{ foundGpu.price }}</p>
     <p><strong>VRAM:</strong> {{ foundGpu.vram }} Gb</p>
+    <p>TESTING: {{pickedType}}</p>
 </div>
 <!--Ending of Gpu picking-->
+</div>
+
+<div *ngIf="pickedType=='Office'">
+  <app-motherboards></app-motherboards>
+</div>
 
 <div *ngIf="readyForMotherBoard == 'ready'">
   <app-motherboards></app-motherboards>

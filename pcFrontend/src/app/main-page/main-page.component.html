@@ -63,17 +63,18 @@
                 Strong CPU
               </label>
               <label class="custom-radio">
-                <input type="radio" name="pc-purpose" class="gaming" (click)="setCpuDemand('Gaming')">
+                <input type="radio" name="pc-purpose" class="gaming" (click)="setCpuDemand('Ultra')">
                 <span class="checkmark"></span>
-                Just making sure its will be fine in 5 years too
+                Just making sure its will be fine in 5 years too             
               </label>
+              <hr>   
               <label for="amdOrIntel">Pick a brand</label>
               <select id="amdOrIntel" name="amdOrIntel" (change)="setBrand($event)">
                 <option value="Intel">Intel</option>
                 <option value="Amd">Amd</option>
               </select>              
               <div *ngIf="pickedBrand && setCpuDemand">
-                <button type="submit" class="btn btn-success" (click)="loadInOptions()">Ye, this is good! Lets continue</button>
+                <button type="submit" class="btn btn-costume" (click)="loadInOptions()">OK</button>
               </div>
             </div>
 
@@ -84,7 +85,7 @@
                 <option value="Amd">Amd</option>
               </select>              
               <div *ngIf="pickedBrand && setCpuDemand">
-                <button type="submit" class="btn btn-success" (click)="loadInOptions()">Ye, this is good! Lets continue</button>
+                <button type="submit" class="btn btn-costume" (click)="loadInOptions()">OK</button>
               </div>
               <!--If the user only needs an Office PC-->
             </div>
@@ -96,7 +97,7 @@
                 <option value="Amd">Amd</option>
               </select>              
               <div *ngIf="pickedBrand && setCpuDemand">
-                <button type="submit" class="btn btn-success" (click)="loadInOptions()">Ye, this is good! Lets continue</button>
+                <button type="submit" class="btn btn-costume" (click)="loadInOptions()">OK</button>
               </div>
               <!--If the user needs a Work PC-->
             </div>
@@ -110,7 +111,7 @@
               <p>The listed Processors will be below here, you can pick any of them freely,
                 we picked your options according to your settings needs for {{cpuDemand}} settings for your {{pickedType}} PC
               </p>
-              <select [(ngModel)]="selectedCpuIdentifier" (change)="updateReadyForGpuStageOne()">
+              <select [(ngModel)]="selectedCpuIdentifier" (change)="updateReadyForGpuStageOne()" class="selectCpu" value="Pick a CPU">
                 <option *ngFor="let cpu of filteredCpusList" [value]="cpu.identifierCpu">
                   {{ cpu.cpuName }}
                 </option>
@@ -129,11 +130,12 @@
               <p><strong>Reccommended settings: </strong>{{cpuDemand}}</p>              
             </div>
             <!--Will need ngIf again for PC types....-->
-            <div *ngIf="(pickedType == 'Gaming' || pickedType == 'Casual' || pickedType == 'Work') && readyForGpuStageOne == true && readyForGpuStageTwo == true && page=='gpusOne'">
+            <div *ngIf="readyForGpuStageOne == true && readyForGpuStageTwo == true && page=='gpusOne'">
               <app-gpus></app-gpus>
               </div>
             <h3>Your currently picked configuration so far: {{pickedType}}</h3> 
           </div>
     </div>
 </body>
+<app-footer></app-footer>
 </html>

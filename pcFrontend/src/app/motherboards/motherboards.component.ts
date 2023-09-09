@@ -15,10 +15,12 @@ export class MotherboardsComponent {
     ngOnInit(): void {
       this.loadInMotherBoards();
     }
+    readyForRam = false;
     readyForMoving = false;
     socketNeeded = this.hub.getSocketNeeded()
     pickedType = this.hub.getPickedType()
     pcieNeeded = this.hub.getPcie()
+    selectedRam: number = 0;
     motherBoards: any[] = []
     selectedMotherBoardIdentifier = 0
     foundMotherboard = {
@@ -32,13 +34,16 @@ export class MotherboardsComponent {
     readyForFilter(){
       this.findSelectedMotherboards()
     }
+    changeReadyForRam(){
+      this.readyForRam = true;
+    }
     loadInMotherBoards(){
       console.log("Proci plat: "+this.socketNeeded);
       console.log("PCIE: "+this.pcieNeeded);
       
       
 
-      this.pcService.typeOfMotherBoard(this.socketNeeded, this.pcieNeeded).subscribe(
+      this.pcService.typeOfMotherBoard(this.socketNeeded, this.pcieNeeded, this.pickedType).subscribe(
         (resp:any)=>{
           this.motherBoards = resp
           console.log("The query was sent successfully for the Motherboard filtering");

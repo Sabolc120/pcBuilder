@@ -20,14 +20,14 @@ public class cpuInputService {
                 if(cpuDemand.equals("Low")) neededPassMarkPoint = 8000;
                 else if(cpuDemand.equals("Medium")) neededPassMarkPoint = 11000;
                 else if(cpuDemand.equals("High")) neededPassMarkPoint = 13000;
-                else if(cpuDemand.equals("Ultra")) neededPassMarkPoint = 17000;
+                else if(cpuDemand.equals("Ultra")) neededPassMarkPoint = 18000;
                 else{
                     System.out.println("Something went wrong with getting the needed String for CPU Points demand, in Gamer");
                 }
             }
             else if(pcType.equals("Office")){
                 neededPassMarkPoint = 2000;
-                return cpuInputRepo.filterIntegratedGpuCpu(neededPassMarkPoint, amdOrIntel, neededPassMarkPoint + 3000);
+                return cpuInputRepo.filterIntegratedGpuCpu(neededPassMarkPoint, amdOrIntel, neededPassMarkPoint + 7000);
             }
             else if(pcType.equals("Casual")){
                 if(cpuDemand.equals("Low")) neededPassMarkPoint = 6000;
@@ -35,6 +35,8 @@ public class cpuInputService {
                 else if(cpuDemand.equals("High")) neededPassMarkPoint = 11000;
                 else if(cpuDemand.equals("Ultra")) neededPassMarkPoint = 13000;
                 else{
+                    System.out.println("PCTYPE: "+pcType);
+                    System.out.println("CPU DEMAND: "+cpuDemand);
                     System.out.println("Something went wrong with getting the needed String for CPU Points demand, in Casual.");
                 }
             }
@@ -46,7 +48,7 @@ public class cpuInputService {
             System.out.println("Something went wrong with deciding the PC specs in CPU, cpuInputService, listOfCpus function.");
         }
         int maxMargin = 0;
-        if(pcType.equals("Gamer") || pcType.equals("Office") || pcType.equals("Casual")) maxMargin = neededPassMarkPoint + 4000;
+        if(pcType.equals("Gamer") || pcType.equals("Office") || pcType.equals("Casual")) maxMargin = neededPassMarkPoint + 3500;
         else maxMargin = neededPassMarkPoint + 50000;
 
         return cpuInputRepo.filterOutCpu(neededPassMarkPoint, amdOrIntel, maxMargin);
